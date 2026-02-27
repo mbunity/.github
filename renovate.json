@@ -1,0 +1,27 @@
+{
+	"extends": ["config:best-practices"],
+	"dependencyDashboard": false,
+	"schedule": ["before 10am every weekday"],
+	"timezone": "Europe/London",
+	"baseBranchPatterns": ["staging"],
+	"packageRules": [
+		{
+			"description": "Group minor and patch Node.js package updates",
+			"matchManagers": ["npm"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"groupName": "node.js packages (minor/patch)"
+		},
+		{
+			"description": "Group minor and patch Docker image updates",
+			"matchDatasources": ["docker"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"groupName": "docker images (minor/patch)"
+		},
+		{
+			"description": "Group minor and patch GitHub Actions updates",
+			"matchManagers": ["github-actions"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"groupName": "github actions (minor/patch)"
+		}
+	]
+}
