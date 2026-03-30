@@ -1,5 +1,6 @@
 {
 	"extends": ["config:best-practices"],
+	"ignorePresets": ["docker:pinDigests", "helpers:pinGitHubActionDigests"],
 	"dependencyDashboard": false,
 	"schedule": ["before 10am every weekday"],
 	"timezone": "Europe/London",
