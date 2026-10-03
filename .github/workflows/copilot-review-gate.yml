@@ -1,0 +1,27 @@
+# Required check (org ruleset "Require Copilot review"): keeps a pull request from
+# merging until Copilot has reviewed it. The logic lives in
+# mbunity/github-actions/copilot-review-gate.
+name: Copilot review gate
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+
+concurrency:
+  group: copilot-review-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  gate:
+    name: Copilot review gate
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 25
+    steps:
+      - uses: mbunity/github-actions/copilot-review-gate@v1
